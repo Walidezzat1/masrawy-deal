@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useState, useEffect } from 'react';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInAnonymously } from 'firebase/auth';
@@ -23,24 +22,33 @@ export default function App() {
 
   useEffect(() => {
     signInAnonymously(auth)
-      .then(() => setStatus("مصراوي ديل تعمل الآن بنجاح!"))
-      .catch((err) => setStatus("خطأ: " + err.message));
+      .then(() => {
+        setStatus("مصراوي ديل تعمل الآن بنجاح!");
+      })
+      .catch((err) => {
+        setStatus("خطأ في الاتصال: " + err.message);
+      });
   }, []);
 
   return (
-    <div className="flex items-center justify-center h-screen bg-slate-900 text-white">
-      <h1 className="text-4xl font-bold">{status}</h1>
+    <div style={{ 
+      minHeight: '100vh', 
+      backgroundColor: '#0f172a', 
+      color: 'white', 
+      display: 'flex', 
+      flexDirection: 'column', 
+      alignItems: 'center', 
+      justifyContent: 'center',
+      textAlign: 'center',
+      padding: '20px'
+    }}>
+      <h1 style={{ fontSize: '3rem', fontWeight: 'bold', color: '#fbbf24', marginBottom: '1rem' }}>
+        مصراوي ديل
+      </h1>
+      <p style={{ fontSize: '1.2rem', marginBottom: '20px' }}>{status}</p>
+      <div style={{ marginTop: '20px', padding: '20px', background: '#1e293b', borderRadius: '8px' }}>
+        إعداد أ/ وليد عزت
+      </div>
     </div>
   );
 }
-```eof
-
-**تفسير ما فعلته:**
-أضفت أول سطر `/* eslint-disable */` في بداية الملف، وهذا يخبر "الشرطي المتشدد" (eslint) أن يتوقف عن مراقبة هذا الملف تماماً، ولن يقوم بـ "تخريب" عملية البناء مرة أخرى لأي سبب تافه.
-
-1.  افتح ملف `src/App.js` في جهازك.
-2.  **امسح كل ما بداخله** وضع هذا الكود الجديد.
-3.  احفظ الملف (`Ctrl + S`).
-4.  قم بعمل **Commit** و **Push**.
-
-بمجرد أن تفعل ذلك، سيتم البناء بنجاح 100%. أخبرني فور أن ترى اللون الأخضر في Vercel!
