@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInAnonymously, onAuthStateChanged } from 'firebase/auth';
-import { getFirestore, doc, setDoc, onSnapshot, updateDoc, getDoc } from 'firebase/firestore';
-import { Users, Play, Copy, Hand, Wallet, Home, AlertCircle } from 'lucide-react';
+import { getAuth, signInAnonymously } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBoQQXMVZNpvTLAWVmVdZnJC21t8GSsirM",
@@ -17,9 +16,22 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-const appId = 'masrawy-deal-app';
 
-const DECK_TEMPLATE = [
+export default function App() {
+  const [status, setStatus] = useState("جاري التشغيل...");
+
+  useEffect(() => {
+    signInAnonymously(auth)
+      .then(() => setStatus("مصراوي ديل تعمل الآن!"))
+      .catch((err) => setStatus("Error: " + err.message));
+  }, []);
+
+  return (
+    <div style={{display:'flex', justifyContent:'center', alignItems:'center', height:'100vh', background:'#0f172a', color:'white'}}>
+      <h1 style={{fontSize:'2rem', fontWeight:'bold'}}>{status}</h1>
+    </div>
+  );
+}
   // Money
   { id: 'm1_1', type: 'money', value: 1, title: '1 مليون', color: 'bg-yellow-100' },
   { id: 'm1_2', type: 'money', value: 1, title: '1 مليون', color: 'bg-yellow-100' },
