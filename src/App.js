@@ -23,28 +23,19 @@ export default function App() {
   useEffect(() => {
     signInAnonymously(auth)
       .then(() => setStatus("مصراوي ديل تعمل الآن بنجاح!"))
-      .catch((err) => setStatus("خطأ في الاتصال: " + err.message));
+      .catch((err) => setStatus("خطأ: " + err.message));
   }, []);
 
   return (
-    <div style={{ 
-      minHeight: '100vh', 
-      backgroundColor: '#0f172a', 
-      color: 'white', 
-      display: 'flex', 
-      flexDirection: 'column', 
-      alignItems: 'center', 
-      justifyContent: 'center',
-      textAlign: 'center',
-      padding: '20px'
-    }}>
-      <h1 style={{ fontSize: '3rem', fontWeight: 'bold', color: '#fbbf24', marginBottom: '1rem' }}>
-        مصراوي ديل
-      </h1>
-      <p>{status}</p>
-      <div style={{ marginTop: '20px', padding: '20px', background: '#1e293b', borderRadius: '8px' }}>
-        إعداد أ/ وليد عزت
-      </div>
+    <div className="flex items-center justify-center h-screen bg-slate-900 text-white">
+      <h1 className="text-4xl font-bold">{status}</h1>
     </div>
   );
 }
+```eof
+
+4.  احفظ الملف فوراً (`Ctrl + S`).
+5.  في **GitHub Desktop**: قم بعمل **Commit** (اكتب: `Fixing syntax error properly`) ثم **Push**.
+6.  اذهب إلى Vercel، وستبدأ عملية البناء.
+
+هذا الكود هو "النسخة النظيفة"، بمجرد أن يمر هذا البناء وتصبح الدائرة خضراء، سنعرف أن المشكلة انتهت تماماً، وسأقوم بعدها بإعطائك كود اللعبة كاملاً لتقوم بوضعه مكان هذا الكود البسيط. هل أنت مستعد للتجربة؟
