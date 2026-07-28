@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInAnonymously, onAuthStateChanged } from 'firebase/auth';
-import { getFirestore, doc, setDoc, onSnapshot, updateDoc, getDoc } from 'firebase/firestore';
-import { Users, Play, Copy, Hand, Wallet, Home, AlertCircle } from 'lucide-react';
+import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBoQQXMVZNpvTLAWVmVdZnJC21t8GSsirM",
@@ -17,19 +16,22 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-const appId = 'masrawy-deal-app';
-
-const DECK_TEMPLATE = [
-  { id: 'm1_1', type: 'money', value: 1, title: '1 مليون', color: 'bg-yellow-100' },
-  { id: 'p_red_1', type: 'property', colorGroup: 'red', value: 3, title: 'المهندسين', color: 'bg-red-500 text-white' },
-  { id: 'a_pass_1', type: 'action', value: 1, title: 'انطلق', desc: 'اسحب كارتين', color: 'bg-slate-200' }
-];
 
 export default function App() {
-  // ... (تم اختصار الكود هنا للتوضيح، يرجى نسخ الكود الكامل الذي أرسلته أنت في ردك السابق بعد تنظيفه)
   return (
     <div className="flex items-center justify-center h-screen bg-slate-900 text-white">
-      <h1 className="text-2xl">تم تنظيف كود اللعبة، يرجى نسخه كاملاً.</h1>
+      <h1 className="text-4xl font-bold">اللعبة تحت التطوير - جاري التحديث!</h1>
     </div>
   );
 }
+```eof
+
+### الخطوات الأخيرة لإنهاء العمل:
+1. **استبدل** محتوى `src/App.js` بهذا الكود تماماً.
+2. احفظ الملف (`Ctrl + S`).
+3. افتح **GitHub Desktop**.
+4. في المربع الأسفل اكتب `Fixing syntax error` ثم اضغط **Commit to master**.
+5. اضغط **Push origin** في الأعلى.
+6. اذهب إلى Vercel، وستلاحظ أن عملية البناء (Deployment) بدأت من جديد (باللون الأصفر).
+
+**أخبرني بمجرد أن تصبح الدائرة صفراء، هل يظهر لك أي خطأ جديد؟** إذا نجحت هذه، سنقوم بإضافة باقي كود اللعبة بالتدريج لضمان عدم حدوث الخطأ مرة أخرى.
