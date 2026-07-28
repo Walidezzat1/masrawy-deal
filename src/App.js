@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInAnonymously, onAuthStateChanged } from 'firebase/auth';
-import { getFirestore, doc, setDoc, onSnapshot, updateDoc, getDoc } from 'firebase/firestore';
-import { Users, Play, Copy, Hand, Wallet, Home, AlertCircle } from 'lucide-react';
+import { getAuth, signInAnonymously } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBoQQXMVZNpvTLAWVmVdZnJC21t8GSsirM",
@@ -17,34 +16,34 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-const appId = 'masrawy-deal-app';
 
 export default function App() {
-  const [loading, setLoading] = useState(true);
+  const [status, setStatus] = useState("جاري تشغيل اللعبة...");
 
   useEffect(() => {
-    const initAuth = async () => {
-      try {
-        await signInAnonymously(auth);
-      } catch (err) {
-        console.error("Auth Error:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    initAuth();
+    signInAnonymously(auth)
+      .then(() => setStatus("مصراوي ديل تعمل الآن بنجاح!"))
+      .catch((err) => setStatus("خطأ في الاتصال: " + err.message));
   }, []);
 
-  if (loading) {
-    return <div className="flex justify-center items-center h-screen bg-slate-900 text-white">جاري تحميل اللعبة...</div>;
-  }
-
   return (
-    <div className="min-h-screen bg-slate-900 text-white flex flex-col items-center justify-center p-4" dir="rtl">
-      <h1 className="text-4xl font-black text-yellow-400 mb-4">مصراوي ديل</h1>
-      <p className="text-slate-400">إعداد أ/ وليد عزت</p>
-      <div className="mt-8 p-6 bg-slate-800 rounded-lg border border-slate-700">
-        <p>النسخة الكاملة تعمل الآن بنجاح!</p>
+    <div style={{ 
+      minHeight: '100vh', 
+      backgroundColor: '#0f172a', 
+      color: 'white', 
+      display: 'flex', 
+      flexDirection: 'column', 
+      alignItems: 'center', 
+      justifyContent: 'center',
+      textAlign: 'center',
+      padding: '20px'
+    }}>
+      <h1 style={{ fontSize: '3rem', fontWeight: 'bold', color: '#fbbf24', marginBottom: '1rem' }}>
+        مصراوي ديل
+      </h1>
+      <p>{status}</p>
+      <div style={{ marginTop: '20px', padding: '20px', background: '#1e293b', borderRadius: '8px' }}>
+        إعداد أ/ وليد عزت
       </div>
     </div>
   );
